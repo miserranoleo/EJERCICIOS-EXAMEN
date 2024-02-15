@@ -24,3 +24,4 @@ cola_misiones.put(Mision("Misión 5", 6))
 while not cola_misiones.empty():
     mision = cola_misiones.get()
     print(f"{mision.nombre}")
+

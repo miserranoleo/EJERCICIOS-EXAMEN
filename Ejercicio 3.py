@@ -1,37 +1,26 @@
-#Ejercicio 3: Encontrar Palabras Comunes
-#Dadas dos listas de palabras, genera una tercera lista con todas las palabras que se repitan en ambas listas, sin repetición en la nueva lista.
-def encontrar_palabras_comunes(lista1, lista2):
-    lista_comun = set()
+#Ejercicio 4: Priorización de Tareas en un Videojuego
+#Durante la planificación de un videojuego, se han acordado una serie de misiones con niveles de dificultad. Crea una estructura de cola con todas las misiones ordenadas por dificultad pero sin mostrar los números de dificultad.
+from queue import PriorityQueue
 
-    for palabra1 in lista1:
-        if palabra1 in lista2 and palabra1 not in lista_comun:
-            lista_comun.add(palabra1)
+class Mision:
+    def __init__(self, nombre, dificultad):
+        self.nombre = nombre
+        self.dificultad = dificultad
 
-    return list(lista_comun)
+    def __lt__(self, other):
+        return self.dificultad < other.dificultad
 
-def obtener_lista_personalizada():
-    try:
-        entrada = input("Ingrese palabras separadas por espacios: ")
-        lista_personalizada = entrada.split()
-        return lista_personalizada
-    except Exception as e:
-        print(f"Error al procesar la entrada: {e}")
-        return []
+# Crear una cola de prioridad
+cola_misiones = PriorityQueue()
 
-# Obtener listas personalizadas
-print("Ingrese la primera lista:")
-lista1 = obtener_lista_personalizada()
+# Agregar las misiones a la cola con su respectiva dificultad usando la clase Mision
+cola_misiones.put(Mision("Misión 1", 5))
+cola_misiones.put(Mision("Misión 2", 3))
+cola_misiones.put(Mision("Misión 3", 7))
+cola_misiones.put(Mision("Misión 4", 2))
+cola_misiones.put(Mision("Misión 5", 6))
 
-print("\nIngrese la segunda lista:")
-lista2 = obtener_lista_personalizada()
-
-# Encontrar palabras comunes
-resultado = encontrar_palabras_comunes(lista1, lista2)
-
-# Mostrar resultado
-if resultado:
-    print("\nPalabras comunes en ambas listas (sin repetición):")
-    print(resultado)
-else:
-    print("\nNo hay palabras comunes en las listas proporcionadas.")
-
+# Mostrar las misiones sin los números de dificultad
+while not cola_misiones.empty():
+    mision = cola_misiones.get()
+    print(f"{mision.nombre}")
